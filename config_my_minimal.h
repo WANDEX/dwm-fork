@@ -31,10 +31,12 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spcalc", "-f", "monospace:size=16", "-g", "50x20", "-e", "bc", "-lq", NULL };
+const char *spcmd3[] = {"st", "-n", "spomodoro", "-g", "120x34", "-e", "pomodoro", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	{"spranger",    spcmd2},
+	{"spcalc",      spcmd2},
+	{"spomodoro",   spcmd3},
 };
 
 /* tagging */
@@ -51,6 +53,7 @@ static const Rule rules[] = {
 	{ NULL,       NULL,       "Event Tester",   0,            0,           0,         1,        -1 },
 	{ NULL,      "spterm",    NULL,       	    SPTAG(0),     1,           1,         0,        -1 },
 	{ NULL,      "spcalc",    NULL,       	    SPTAG(1),     1,           1,         0,        -1 },
+	{ NULL,      "spomodoro", NULL,       	    SPTAG(2),     1,           1,         0,        -1 },
 };
 
 /* layout(s) */
@@ -151,9 +154,10 @@ static Key keys[] = {
 	{ MODKEY,			XK_i,		setmfact,	{.f = +0.05} },
 	//{ MODKEY,			XK_semicolon,	shiftview,	{ .i = 1 } },
 	//{ MODKEY|ShiftMask,		XK_semicolon,	shifttag,	{ .i = 1 } },
+        { MODKEY|ShiftMask,		XK_grave,	togglescratch,	{.ui = 0} },
 	{ MODKEY,			XK_apostrophe,	togglescratch,	{.ui = 1} },
+	{ MODKEY|ShiftMask,		XK_p,		togglescratch,	{.ui = 2} },
 	/* { MODKEY|ShiftMask,		XK_apostrophe,	spawn,		SHCMD("") }, */
-	//{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 
 	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
 	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
